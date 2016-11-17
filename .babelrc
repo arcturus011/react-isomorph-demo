@@ -4,7 +4,6 @@
     "es2015"
   ],
   "plugins": [
-    "transform-regenerator",
-    "transform-decorators-legacy"
+    "transform-regenerator"
   ]
 }
