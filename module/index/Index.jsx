@@ -35,7 +35,7 @@ export default class extends React.Component {
     render() {
         return (
             <div>
-                {this.state.pageData}
+                data: {this.state.pageData}
             </div>
         )
     }
