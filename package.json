@@ -4,7 +4,7 @@
   "description": "react-isomorph-demo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack -d -w --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/larry011/react-isomorph-demo#readme",
   "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
     "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "regenerator-runtime": "^0.9.6"
   }
 }
