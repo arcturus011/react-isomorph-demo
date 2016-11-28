@@ -2,9 +2,11 @@
  * Created by chenchen on 2016/11/15.
  */
 const path = require('path');
+const webpack = require("webpack");
+const htmlWebapckPluginConfig = require("./src/config/html-webpack-plugin.config");
 //入口文件
 let entry = {
-    index: './module/index/Index_entry.js'
+    index: './src/module/index/Index_entry.js'
 };
 
 //浏览器端的配置
@@ -12,7 +14,7 @@ let browserConfig = {
     entry,
     output: {
         path: path.join(__dirname, 'build'),
-        publicPath: '/build',
+        publicPath: '/',
         filename: "js/[name].bundle.js",
         chunkFilename: "js/[id].bundle.js"
     },
@@ -24,7 +26,23 @@ let browserConfig = {
                 loader: `babel`,
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common',
+            filename: 'js/common.js',
+        }),
+        new webpack.ProvidePlugin({
+            React: 'react',
+            ReactDOM: 'react-dom',
+            fetch: 'isomorphic-fetch',
+            promise: 'promise'
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('development')
+        }),
+        ...htmlWebapckPluginConfig
+    ],
 };
 
 module.exports = browserConfig;
