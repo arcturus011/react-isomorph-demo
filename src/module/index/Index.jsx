@@ -37,7 +37,16 @@ export default class extends React.Component {
     render() {
         return (
             <div>
-                data: {this.state.pageData}
+               <p className="result">
+                   data: {this.state.pageData}
+               </p>
+
+                    <a href="#">
+                        <div className="dl">
+
+                        </div>
+                    </a>
+
             </div>
         )
     }

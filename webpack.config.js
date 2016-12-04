@@ -16,7 +16,7 @@ let browserConfig = {
     entry,
     output: {
         path: path.join(__dirname, 'build'),
-        publicPath: '',
+        publicPath: '/',
         filename: "js/[name].bundle.js",
         chunkFilename: "js/[id].bundle.js"
     },
@@ -27,7 +27,7 @@ let browserConfig = {
                 loader: 'url?limit=1024&name=img/[name].[ext]'
             }, {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file?name=../fonts/[name].[ext]"
+                loader: "file?name=fonts/[name].[ext]"
             },
             {
                 test: /\.jsx?$/,
