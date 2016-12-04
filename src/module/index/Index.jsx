@@ -1,5 +1,6 @@
 import React from 'react';
 import 'regenerator-runtime/runtime';
+import './stylus/index.styl';
 
 export default class extends React.Component {
     constructor() {
@@ -21,6 +22,7 @@ export default class extends React.Component {
             }, 2000)
         });
     }
+
 
     async componentDidMount() {
 
