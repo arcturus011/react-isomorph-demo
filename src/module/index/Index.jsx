@@ -1,23 +1,29 @@
 import React from 'react';
 import 'regenerator-runtime/runtime';
 import './stylus/index.styl';
+import ReactDOM from 'react-dom';
+import TodoList from './component/TodoList';
+import Comment from './component/Comment';
 
-export default class extends React.Component {
+
+export default class Layout extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            pageData: 'loading'
+            todoList: []
         }
+
+        this.handleAddComment = this.handleAddComment.bind(this);
     }
 
-    getAsyncData() {
+    fetchTodoList() {
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
+            setTimeout(_ => {
                 resolve({
                     code: 200,
                     msg: 'success',
-                    data: 'hello!'
+                    data: ['111', '222']
                 })
             }, 2000)
         });
@@ -26,29 +32,37 @@ export default class extends React.Component {
 
     async componentDidMount() {
 
-        let data = await this.getAsyncData();
+        let {data} = await this.fetchTodoList();
 
         this.setState({
-            pageData: data.data
+            todoList: data
         })
 
     }
 
+    handleAddComment(todo) {
+
+    }
+
+
     render() {
         return (
             <div>
-               <p className="result">
-                   data: {this.state.pageData}
-               </p>
+                <header>
+                    <h1>
+                        TodoList
+                    </h1>
+                </header>
+                <Comment handleAddComment={this.handleAddComment}/>
 
-                    <a href="#">
-                        <div className="dl">
-
-                        </div>
-                    </a>
+                <TodoList todoList={this.state.todoList}/>
 
             </div>
         )
     }
 
+}
+
+if (process.browser) {
+    ReactDOM.render(<Layout/>, document.getElementById('wrap'));
 }

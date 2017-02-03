@@ -10,4 +10,10 @@ module.exports = [
         template: path.resolve(__dirname, '../template/base.html'),
         hash: true,
     }),
+    new HtmlWebpackPlugin({
+        filename: 'todo_detail.html',
+        chunks: ['common', 'todoDetail'],
+        template: path.resolve(__dirname, '../template/base.html'),
+        hash: true,
+    })
 ]

@@ -8,7 +8,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 //入口文件
 let entry = {
-    index: './src/module/index/Index_entry.js'
+    index: './src/module/index/Index.jsx',
+    todoDetail: './src/module/TodoDetail/TodoDetail.jsx'
 };
 
 //浏览器端的配置
@@ -20,19 +21,22 @@ let browserConfig = {
         filename: "js/[name].bundle.js",
         chunkFilename: "js/[id].bundle.js"
     },
+    resolve: {
+        extensions: ['','.js', '.jsx']
+    },
     module: {
         loaders: [
             {
                 test: /\.(png|jpe?g|gif)/,
                 loader: 'url?limit=1024&name=img/[name].[ext]'
             }, {
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file?name=fonts/[name].[ext]"
+                test: /\.(ttf|eot|svg)$/,
+                loader: "url?limit=1024&name=fonts/[name].[ext]"
             },
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loaders: [`babel`],
+                loader: "babel"
             },
             {
                 test: /\.(styl|css)$/,
