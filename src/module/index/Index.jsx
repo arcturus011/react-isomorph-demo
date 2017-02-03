@@ -4,8 +4,9 @@ import './stylus/index.styl';
 import ReactDOM from 'react-dom';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
+import bs from '../common/bs';
 
-
+@bs
 export default class Layout extends React.Component {
     constructor() {
         super();

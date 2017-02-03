@@ -5,6 +5,7 @@ const path = require('path');
 const webpack = require("webpack");
 const htmlWebapckPluginConfig = require("./src/config/html-webpack-plugin.config");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const autoRefresh = require('./src/config/browser-sync.config.js');
 
 //入口文件
 let entry = {
@@ -22,7 +23,7 @@ let browserConfig = {
         chunkFilename: "js/[id].bundle.js"
     },
     resolve: {
-        extensions: ['','.js', '.jsx']
+        extensions: ['', '.js', '.jsx']
     },
     module: {
         loaders: [
@@ -59,7 +60,8 @@ let browserConfig = {
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('development')
         }),
         new ExtractTextPlugin('css/[name].css'),
-        ...htmlWebapckPluginConfig
+        ...htmlWebapckPluginConfig,
+        autoRefresh
     ],
 };
 
