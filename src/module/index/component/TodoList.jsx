@@ -6,6 +6,7 @@ export default class TodoList extends React.Component {
     constructor(props) {
         super(props);
 
+
         this.handleDelTodo = this.handleDelTodo.bind(this);
 
     }
@@ -14,15 +15,23 @@ export default class TodoList extends React.Component {
 
     }
 
-    handleDelTodo() {
+    handleDelTodo(index) {
 
+        this.props.onDelTodo(index);
     }
 
     render() {
+        if (this.props.todoList.length === 0) {
+            return <p>loading</p>
+        }
         return (
             <div className="todolist-section">
-                <ul>
-                    <TodoItem handleDelTodo={this.handleDelTodo}/>
+                <ul className="todo-list ">
+                    {this.props.todoList.map((todo, index) => {
+                        return (
+                            <TodoItem key={index} todo={todo} index={index} handleDelTodo={this.handleDelTodo}/>
+                        )
+                    })}
                 </ul>
             </div>
         )
@@ -32,5 +41,5 @@ export default class TodoList extends React.Component {
 
 TodoList.propTypes = {
     todoList: React.PropTypes.array.isRequired,
-    handleDelTodo: React.PropTypes.func.isRequired
+    onDelTodo: React.PropTypes.func.isRequired
 }

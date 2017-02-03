@@ -8,14 +8,16 @@ import bs from '../common/bs';
 
 @bs
 export default class Layout extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
+
+        this.handleAddComment = this.handleAddComment.bind(this);
+        this.onDelTodo = this.onDelTodo.bind(this);
 
         this.state = {
             todoList: []
         }
-
-        this.handleAddComment = this.handleAddComment.bind(this);
     }
 
     fetchTodoList() {
@@ -43,20 +45,38 @@ export default class Layout extends React.Component {
 
     handleAddComment(todo) {
 
+        console.log(todo);
+
+        this.setState({
+            todoList: [...this.state.todoList, todo]
+        })
+
     }
 
+    onDelTodo(index) {
+
+        console.log(index);
+
+        let todoList = this.state.todoList.filter((val, i) => i !== index);
+
+        this.setState({
+            todoList
+        });
+
+
+    }
 
     render() {
         return (
             <div>
                 <header>
-                    <h1>
+                    <h1 className="title">
                         TodoList
                     </h1>
                 </header>
                 <Comment handleAddComment={this.handleAddComment}/>
 
-                <TodoList todoList={this.state.todoList}/>
+                <TodoList onDelTodo={this.onDelTodo} todoList={this.state.todoList}/>
 
             </div>
         )
