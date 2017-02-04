@@ -9,7 +9,6 @@ import {connect, Provider} from 'react-redux';
 import {createStore} from 'redux';
 import reducers from './reducer/Index';
 
-@connect(_ => _)//这里只用到mapStateToProps，而且不对state加以过滤
 @bs
 export default class Layout extends React.Component {
     constructor(props) {
@@ -125,9 +124,11 @@ if (process.browser) {
 
     let store = createStore(reducers, initialData, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
+    let App = connect(_ => _)(Layout)//这里只用到mapStateToProps，而且不对state加以过滤
+
     ReactDOM.render(
         <Provider store={store}>
-            <Layout/>
+            <App/>
         </Provider>,
         document.getElementById('wrap'));
 }

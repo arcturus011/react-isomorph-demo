@@ -6,6 +6,7 @@ const webpack = require("webpack");
 const htmlWebapckPluginConfig = require("./src/config/html-webpack-plugin.config");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoRefresh = require('./src/config/browser-sync.config.js');
+const nodeExternals = require('webpack-node-externals');
 
 //入口文件
 let entry = {
@@ -37,7 +38,7 @@ let browserConfig = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: "babel"
+                loader: "babel-loader"
             },
             {
                 test: /\.(styl|css)$/,
@@ -65,4 +66,49 @@ let browserConfig = {
     ],
 };
 
-module.exports = browserConfig;
+let serverConfig = {};
+
+Object.assign(serverConfig, browserConfig, {
+    output: {
+        path: path.join(__dirname, 'build_server'),
+        filename: "[name].bundle.js",
+        libraryTarget: 'commonjs2'
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                query: {
+                    babelrc: "false",
+                    presets: ['react'],
+                    plugins: [
+                        "transform-decorators-legacy",
+                        "transform-es2015-modules-commonjs" //如果不转换成require，import 'xxx.styl'会报错
+                    ]
+                }
+            },
+            {
+                test: /\.(styl|css)$/,
+                loader: 'null'
+            },
+        ]
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            React: 'react',
+            ReactDOM: 'react-dom',
+            fetch: 'isomorphic-fetch',
+            promise: 'promise'
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('development')
+        }),
+    ],
+    target: 'node',
+    externals: [nodeExternals()],
+});
+
+
+module.exports = [browserConfig, serverConfig];
