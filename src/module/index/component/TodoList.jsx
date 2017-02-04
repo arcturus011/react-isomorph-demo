@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TodoItem from './TodoItem';
 
 export default class TodoList extends React.Component {
@@ -42,4 +41,4 @@ export default class TodoList extends React.Component {
 TodoList.propTypes = {
     todoList: React.PropTypes.array.isRequired,
     onDelTodo: React.PropTypes.func.isRequired
-}
+};

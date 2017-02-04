@@ -5,7 +5,11 @@ import ReactDOM from 'react-dom';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
 import bs from '../common/bs';
+import {connect, Provider} from 'react-redux';
+import {createStore} from 'redux';
+import reducers from './reducer/Index';
 
+@connect(_ => _)//这里只用到mapStateToProps，而且不对state加以过滤
 @bs
 export default class Layout extends React.Component {
     constructor(props) {
@@ -15,8 +19,14 @@ export default class Layout extends React.Component {
         this.handleAddComment = this.handleAddComment.bind(this);
         this.onDelTodo = this.onDelTodo.bind(this);
 
-        this.state = {
-            todoList: []
+        /*this.state = {
+         todoList: []
+         }*/
+    }
+
+    static get contextTypes() {
+        return {
+            store: React.PropTypes.object
         }
     }
 
@@ -35,33 +45,57 @@ export default class Layout extends React.Component {
 
     async componentDidMount() {
 
+        let {dispatch} = this.props;
+
+
         let {data} = await this.fetchTodoList();
 
-        this.setState({
-            todoList: data
-        })
+        dispatch({
+            type: 'ADD_TODO',
+            payload: data
+        });
+
+        /* this.setState({
+         todoList: data
+         })*/
 
     }
 
     handleAddComment(todo) {
 
-        console.log(todo);
+        let {dispatch} = this.props;
 
-        this.setState({
-            todoList: [...this.state.todoList, todo]
-        })
+        dispatch({
+            type: 'ADD_TODO',
+            payload: [todo]
+        });
+
+        /*  console.log(todo);
+
+         this.setState({
+         todoList: [...this.state.todoList, todo]
+         })*/
 
     }
 
     onDelTodo(index) {
 
+        let {dispatch} = this.props;
+
+
         console.log(index);
 
-        let todoList = this.state.todoList.filter((val, i) => i !== index);
-
-        this.setState({
-            todoList
+        dispatch({
+            type: 'DEL_TODO',
+            payload: index
         });
+
+
+        /* let todoList = this.state.todoList.filter((val, i) => i !== index);
+
+         this.setState({
+         todoList
+         });*/
 
 
     }
@@ -76,7 +110,7 @@ export default class Layout extends React.Component {
                 </header>
                 <Comment handleAddComment={this.handleAddComment}/>
 
-                <TodoList onDelTodo={this.onDelTodo} todoList={this.state.todoList}/>
+                <TodoList onDelTodo={this.onDelTodo} todoList={this.props.todoList}/>
 
             </div>
         )
@@ -85,5 +119,16 @@ export default class Layout extends React.Component {
 }
 
 if (process.browser) {
-    ReactDOM.render(<Layout/>, document.getElementById('wrap'));
+
+    //初始数据，用于和server render数据同步
+    let initialData = window._SERVER_DATA || {};
+
+    let store = createStore(reducers, initialData, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+    ReactDOM.render(
+        <Provider store={store}>
+            <Layout/>
+        </Provider>,
+        document.getElementById('wrap'));
 }
+
