@@ -7,7 +7,7 @@
     "watch": "webpack -d -w --progress --colors --bs",
     "test-server": "anywhere -p 18341 -d ./build",
     "dist": "cross-env NODE_ENV='production' webpack -p",
-    "test-ssr": "node --harmony server/cli.js"
+    "test-ssr": "node --harmony test/cli.js"
   },
   "repository": {
     "type": "git",

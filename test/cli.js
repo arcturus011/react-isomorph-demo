@@ -5,7 +5,7 @@
  */
 
 
-const IndexBundle = require("../build_server/index.bundle");
+const IndexBundle = require("../build_server/index.bundle.js");
 const React = require("react");
 const ReactDOMServer = require("react-dom/server");
 let {renderToString} = ReactDOMServer;

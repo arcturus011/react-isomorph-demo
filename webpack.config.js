@@ -72,7 +72,7 @@ Object.assign(serverConfig, browserConfig, {
     output: {
         path: path.join(__dirname, 'build_server'),
         filename: "[name].bundle.js",
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'commonjs2' //设置导出类型，web端默认是var，node需要module.exports = xxx的形式
     },
     module: {
         loaders: [
@@ -80,7 +80,7 @@ Object.assign(serverConfig, browserConfig, {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: "babel-loader",
-                query: {
+                query: {                //node端的babel编译配置可以简化很多
                     babelrc: "false",
                     presets: ['react'],
                     plugins: [
@@ -90,7 +90,7 @@ Object.assign(serverConfig, browserConfig, {
                 }
             },
             {
-                test: /\.(styl|css)$/,
+                test: /\.(styl|css)$/,          //node端不能 require('xx.css')，会报错
                 loader: 'null'
             },
         ]
@@ -107,7 +107,7 @@ Object.assign(serverConfig, browserConfig, {
         }),
     ],
     target: 'node',
-    externals: [nodeExternals()],
+    externals: [nodeExternals()], //不把node_modules中的文件打包
 });
 
 
