@@ -4,6 +4,7 @@
   "description": "react-isomorph-demo",
   "main": "server/index.js",
   "scripts": {
+    "start": "node --harmony server/index",
     "watch": "webpack -d -w --progress --colors --bs",
     "test-server": "anywhere -p 18341 -d ./build",
     "dist": "cross-env NODE_ENV='production' webpack -p",
@@ -44,7 +45,13 @@
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
+    "bluebird": "^3.4.7",
+    "cheerio": "^0.22.0",
+    "isomorphic-fetch": "^2.2.1",
     "koa": "^2.0.0",
+    "koa-better-router": "^2.1.1",
+    "koa-serve": "^0.1.7",
+    "koa-static-server": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
