@@ -37,14 +37,14 @@ async function loadHTMLTemplate(path) {
 }
 
 
-router.get('/', async(ctx, next) => {
+router.get('/', async (ctx, next) => {
 
     let $ = await loadHTMLTemplate(path.resolve(__dirname, '../build/index.html'));
 
     if (!$) {
         return ctx.body = null;
     }
-
+    //这里导出的组件不包括redux
     let IndexBundle = require("../build_server/index.bundle.js");
 
     //fetch接口数据
@@ -70,7 +70,7 @@ router.get('/', async(ctx, next) => {
 });
 
 
-router.get('/todo_detail', async(ctx, next) => {
+router.get('/todo_detail', async (ctx, next) => {
     let $ = await loadHTMLTemplate(path.resolve(__dirname, '../build/todo_detail.html'));
 
     if (!$) {
@@ -83,7 +83,7 @@ router.get('/todo_detail', async(ctx, next) => {
 
 
 //API接口
-router.get('/api/todo_list', async(ctx, next) => {
+router.get('/api/todo_list', async (ctx, next) => {
 
     return ctx.body = ['11', '222'];
 

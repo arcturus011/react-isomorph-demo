@@ -8,6 +8,7 @@ import bs from '../common/bs';
 import {connect, Provider} from 'react-redux';
 import {createStore} from 'redux';
 import reducers from './reducer/Index';
+import ConfirmModal from './component/ConfirmModal.jsx';
 
 @bs
 export default class Layout extends React.Component {
@@ -110,7 +111,7 @@ export default class Layout extends React.Component {
                 <Comment handleAddComment={this.handleAddComment}/>
 
                 <TodoList onDelTodo={this.onDelTodo} todoList={this.props.todoList}/>
-
+                <ConfirmModal {...this.props.confirmModalData}/>
             </div>
         )
     }

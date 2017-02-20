@@ -18,6 +18,23 @@ function todoList(todolist = [], action) {
 
 }
 
+//确认删除模态框
+function confirmModalData(data = {
+    show: false,
+    resolve: null,
+    reject: null
+}, action) {
+    let d = {};
+    switch (action.type) {
+        case 'SHOW_MODAL':
+            return Object.assign(d, data, action.payload);
+        case 'CLOSE_MODAL':
+            return Object.assign(d, data, {show: false});
+        default:
+            return data;
+    }
+}
+
 //... 其他reducer
 
-export default combineReducers({todoList});
+export default combineReducers({todoList, confirmModalData});
