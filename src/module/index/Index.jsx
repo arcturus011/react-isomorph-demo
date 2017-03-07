@@ -1,15 +1,12 @@
 import React from 'react';
 import 'regenerator-runtime/runtime';
 import './stylus/index.styl';
-import ReactDOM from 'react-dom';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
 import bs from '../common/bs';
-import {connect, Provider} from 'react-redux';
-import {createStore} from 'redux';
-import reducers from './reducer/Index';
 
-@bs
+
+// @bs
 export default class Layout extends React.Component {
     constructor(props) {
         super(props);
@@ -21,12 +18,6 @@ export default class Layout extends React.Component {
         /*this.state = {
          todoList: []
          }*/
-    }
-
-    static get contextTypes() {
-        return {
-            store: React.PropTypes.object
-        }
     }
 
     fetchTodoList() {
@@ -47,12 +38,12 @@ export default class Layout extends React.Component {
         let {dispatch} = this.props;
 
 
-        let {data} = await this.fetchTodoList();
+        /*let {data} = await this.fetchTodoList();
 
         dispatch({
             type: 'ADD_TODO',
             payload: data
-        });
+        });*/
 
         /* this.setState({
          todoList: data
@@ -99,6 +90,10 @@ export default class Layout extends React.Component {
 
     }
 
+    componentWillUnmount() {
+        console.log(10);
+    }
+
     render() {
         return (
             <div>
@@ -117,19 +112,7 @@ export default class Layout extends React.Component {
 
 }
 
-if (process.browser) {
 
-    //初始数据，用于和server render数据同步
-    let initialData = window._SERVER_DATA || {};
-
-    let store = createStore(reducers, initialData, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-    let App = connect(_ => _)(Layout);//用connect包装一下，这里只用到mapStateToProps，而且不对state加以过滤
-
-    ReactDOM.render(
-        <Provider store={store}>
-            <App/>
-        </Provider>,
-        document.getElementById('wrap'));
-}
-
+Layout.contextTypes = {
+    store: React.PropTypes.object
+};

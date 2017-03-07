@@ -23,7 +23,7 @@ export default class TodoItem extends React.Component {
         return (
             <li className="todo-list-item">
                 <p>{todo}</p>
-                <button onClick={this.del.bind(this)} className="pure-button"> X</button>
+                <button onClick={this.del.bind(this)} className="pure-button">DEL</button>
             </li>
         )
     }

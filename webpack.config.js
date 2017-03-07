@@ -10,7 +10,15 @@ const nodeExternals = require('webpack-node-externals');
 
 //入口文件
 let entry = {
-    index: './src/module/index/Index.jsx',
+    index: [
+        'react-hot-loader/patch',
+        // activate HMR for React
+        'webpack-dev-server/client?http://localhost:23456',
+        // bundle the client for webpack-dev-server
+        // and connect to the provided endpoint
+        'webpack/hot/only-dev-server',
+        './src/module/index/hot_entry.js',
+    ],
     todoDetail: './src/module/TodoDetail/TodoDetail.jsx'
 };
 
@@ -24,10 +32,10 @@ let browserConfig = {
         chunkFilename: "js/[id].bundle.js"
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(png|jpe?g|gif)/,
                 loader: 'url?limit=1024&name=img/[name].[ext]'
@@ -42,7 +50,11 @@ let browserConfig = {
             },
             {
                 test: /\.(styl|css)$/,
-                loader: ExtractTextPlugin.extract(["vue-style"], "css?sourceMap!autoprefixer!stylus")
+                // loader: ExtractTextPlugin.extract(["vue-style"], "css?sourceMap!autoprefixer!stylus")
+                loader: ExtractTextPlugin.extract({
+                    fallback: "vue-style-loader",
+                    use: "css?sourceMap!autoprefixer!stylus"
+                })
             },
         ]
     },
@@ -55,27 +67,43 @@ let browserConfig = {
             React: 'react',
             ReactDOM: 'react-dom',
             fetch: 'isomorphic-fetch',
-            promise: 'promise'
+            Promise: 'promise'
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('development')
         }),
         new ExtractTextPlugin('css/[name].css'),
         ...htmlWebapckPluginConfig,
-        autoRefresh
+        new webpack.HotModuleReplacementPlugin(),
+        // enable HMR globally
+
+        new webpack.NamedModulesPlugin(),
+        // autoRefresh
     ],
+    resolveLoader: {
+        moduleExtensions: ["-loader"]
+    },
+    devServer: {
+        host: 'localhost',
+        port: 23456,
+
+        historyApiFallback: true,
+        // respond to 404s with index.html
+
+        hot: true,
+        // enable HMR on the server
+    },
 };
 
-let serverConfig = {};
 
-Object.assign(serverConfig, browserConfig, {
+let serverConfig = Object.assign({}, browserConfig, {
     output: {
         path: path.join(__dirname, 'build_server'),
         filename: "[name].bundle.js",
         libraryTarget: 'commonjs2' //设置导出类型，web端默认是var，node需要module.exports = xxx的形式
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
@@ -100,7 +128,7 @@ Object.assign(serverConfig, browserConfig, {
             React: 'react',
             ReactDOM: 'react-dom',
             fetch: 'isomorphic-fetch',
-            promise: 'promise'
+            Promise: 'promise'
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('development')
@@ -111,4 +139,4 @@ Object.assign(serverConfig, browserConfig, {
 });
 
 
-module.exports = [browserConfig, serverConfig];
+module.exports = [browserConfig];

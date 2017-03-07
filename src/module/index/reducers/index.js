@@ -2,8 +2,8 @@
  * Created by chenchen on 2017/2/4.
  */
 
-import {combineReducers} from 'redux';
 
+import {combineReducers} from 'redux';
 
 function todoList(todolist = [], action) {
     switch (action.type) {
@@ -19,5 +19,6 @@ function todoList(todolist = [], action) {
 }
 
 //... 其他reducer
+
 
 export default combineReducers({todoList});

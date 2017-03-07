@@ -35,7 +35,7 @@ export default class Comment extends React.Component {
                           name="comment-input"
                           id="comment-input"
                           placeholder="add todo"></textarea>
-                <button onClick={this.add.bind(this)} className="pure-button pure-button-primary">ADD</button>
+                <button onClick={this.add.bind(this)} className="pure-button pure-button-primary">添加</button>
             </div>
         )
     }
