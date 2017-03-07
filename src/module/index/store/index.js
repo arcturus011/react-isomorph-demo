@@ -10,7 +10,7 @@ import reducers from '../reducers/';
 
 export default function configureStore(initialState) {
 
-    const store = createStore(reducers, initialState);
+    const store = createStore(reducers, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
     if (module.hot) {
         console.warn(11111);
