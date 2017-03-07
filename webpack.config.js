@@ -50,11 +50,11 @@ let browserConfig = {
             },
             {
                 test: /\.(styl|css)$/,
-                // loader: ExtractTextPlugin.extract(["vue-style"], "css?sourceMap!autoprefixer!stylus")
-                loader: ExtractTextPlugin.extract({
-                    fallback: "vue-style-loader",
-                    use: "css?sourceMap!autoprefixer!stylus"
-                })
+                loader: "vue-style!css?sourceMap!autoprefixer!stylus"
+                // loader: ExtractTextPlugin.extract({
+                //     fallback: "vue-style-loader",
+                //     use: "css?sourceMap!autoprefixer!stylus"
+                // })
             },
         ]
     },

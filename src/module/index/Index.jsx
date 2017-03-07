@@ -4,6 +4,7 @@ import './stylus/index.styl';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
 import bs from '../common/bs';
+import Provider from "react-redux/src/components/Provider";
 
 
 // @bs
@@ -38,12 +39,12 @@ export default class Layout extends React.Component {
         let {dispatch} = this.props;
 
 
-        /*let {data} = await this.fetchTodoList();
+        let {data} = await this.fetchTodoList();
 
         dispatch({
             type: 'ADD_TODO',
             payload: data
-        });*/
+        });
 
         /* this.setState({
          todoList: data
@@ -96,22 +97,27 @@ export default class Layout extends React.Component {
 
     render() {
         return (
-            <div>
-                <header>
-                    <h1 className="title">
-                        TodoList
-                    </h1>
-                </header>
-                <Comment handleAddComment={this.handleAddComment}/>
 
-                <TodoList onDelTodo={this.onDelTodo} todoList={this.props.todoList}/>
+            <Provider store={this.props.store}>
+                <div>
+                    <header>
+                        <h1 className="title">
+                            TodoList
+                        </h1>
+                    </header>
+                    <Comment handleAddComment={this.handleAddComment}/>
 
-            </div>
+                    <TodoList onDelTodo={this.onDelTodo} todoList={this.props.todoList}/>
+                </div>
+            </Provider>
         )
     }
 
 }
 
+Layout.propTypes = {
+    store: React.PropTypes.object.isRequired
+};
 
 Layout.contextTypes = {
     store: React.PropTypes.object

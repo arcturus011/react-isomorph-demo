@@ -11,9 +11,6 @@ import configureStore from './store/index';
 import ReactDOM from 'react-dom';
 
 
-
-
-
 if (process.browser) {
 
 
@@ -28,9 +25,9 @@ if (process.browser) {
 
 
         ReactDOM.render(
-            <Provider store={store}>
-                <App/>
-            </Provider>,
+            <AppContainer>
+                <App store={store}/>
+            </AppContainer>,
             document.getElementById('wrap'));
 
     };
