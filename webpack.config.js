@@ -13,10 +13,11 @@ let entry = {
     index: [
         'react-hot-loader/patch',
         // activate HMR for React
-        'webpack-dev-server/client?http://localhost:23456',
+        // 'webpack-dev-server/client?http://localhost:23456', //原始的dev-server
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000',
         // bundle the client for webpack-dev-server
         // and connect to the provided endpoint
-        'webpack/hot/only-dev-server',
+        // 'webpack/hot/only-dev-server',
         './src/module/index/hot_entry.js',
     ],
     todoDetail: './src/module/TodoDetail/TodoDetail.jsx'
@@ -27,7 +28,7 @@ let browserConfig = {
     entry,
     output: {
         path: path.join(__dirname, 'build'),
-        publicPath: '',
+        publicPath: '/',
         filename: "js/[name].bundle.js",
         chunkFilename: "js/[id].bundle.js"
     },
@@ -83,16 +84,16 @@ let browserConfig = {
     resolveLoader: {
         moduleExtensions: ["-loader"]
     },
-    devServer: {
-        host: 'localhost',
-        port: 23456,
-
-        historyApiFallback: true,
-        // respond to 404s with index.html
-
-        hot: true,
-        // enable HMR on the server
-    },
+    // devServer: {
+    //     host: 'localhost',
+    //     port: 23456,
+    //
+    //     historyApiFallback: true,
+    //     // respond to 404s with index.html
+    //
+    //     hot: true,
+    //     // enable HMR on the server
+    // },
 };
 
 

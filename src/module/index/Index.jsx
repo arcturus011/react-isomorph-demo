@@ -108,6 +108,7 @@ export default class Layout extends React.Component {
                     <Comment handleAddComment={this.handleAddComment}/>
 
                     <TodoList onDelTodo={this.onDelTodo} todoList={this.props.todoList}/>
+                    <a href="https://github.com/larry011/react-isomorph-demo.git" className="dl"></a>
                 </div>
             </Provider>
         )
