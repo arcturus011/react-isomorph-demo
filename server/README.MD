@@ -59,3 +59,7 @@ react-hot-reload 总结
 官方的`koa-webpack-middleware`貌似维护不行，我按照文档给的例子测试，结果server开启后一直404。。。
 
 具体配置参考此目录下的`devServer.js`
+
+##TODO
+
+- [ ] 将DevServer整合ServerRender
