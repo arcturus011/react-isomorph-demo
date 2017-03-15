@@ -10,20 +10,9 @@ import configureStore from './store/index';
 
 import ReactDOM from 'react-dom';
 
+import mapDispatchToProps from './actions/index.js';
 
-function mapDispatchToProps(dispatch) {
-    return {
-        addTodo: (todoArr) => dispatch({
-            type: 'ADD_TODO',
-            payload: todoArr
-        }),
-        delTodo: (todoIndex) => dispatch({
-            type: 'DEL_TODO',
-            payload: todoIndex
 
-        })
-    }
-}
 
 function mapStateToProps(state) {
     return state;
