@@ -1,7 +1,7 @@
 {
   "name": "react-isomorph-demo",
   "version": "1.0.0",
-  "description": "react-isomorph-demo",
+  "description": "React + Redux + Koa 同构Demo",
   "main": "server/index.js",
   "scripts": {
     "start": "node --harmony server/index",
@@ -33,7 +33,7 @@
     "babel-preset-react": "^6.22.0",
     "browser-sync": "^2.18.7",
     "cross-env": "^3.1.4",
-    "css-loader": "^0.26.1",
+    "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.28.0",
@@ -41,10 +41,9 @@
     "null-loader": "^0.1.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "stylus": "^0.54.5",
-    "stylus-loader": "^2.4.0",
+    "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.7",
     "vue-style-loader": "^2.0.0",
-    "webpack": "^1.11",
     "webpack-dev-server": "^2.4.1",
     "webpack-node-externals": "^1.5.4"
   },
@@ -58,9 +57,9 @@
     "koa-static-server": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-hot-loader": "^1.3.1",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "regenerator-runtime": "^0.10.1"
+    "regenerator-runtime": "^0.10.1",
+    "webpack": "^2.2.1"
   }
 }

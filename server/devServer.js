@@ -10,6 +10,8 @@ const config = require('../webpack.config.js')[0];
 //     // console.log((stats.toJson("verbose").children.assets));
 // });
 
+console.dir(webpackMiddleware );
+
 app.use(webpackMiddleware({
     config: config,
     dev: {

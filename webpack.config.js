@@ -73,7 +73,7 @@ let browserConfig = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('development')
         }),
-        new ExtractTextPlugin('css/[name].css'),
+        // new ExtractTextPlugin('css/[name].css'),
         ...htmlWebapckPluginConfig,
         new webpack.HotModuleReplacementPlugin(),
         // enable HMR globally
