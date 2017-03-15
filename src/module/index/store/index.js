@@ -13,14 +13,12 @@ export default function configureStore(initialState) {
     const store = createStore(reducers, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
     if (module.hot) {
-        console.warn('reducer replace');
         // Enable Webpack hot module replacement for reducers
-        module.hot.accept('../reducers/index', () => {
+        module.hot.accept('../reducers/index.js', () => {
 
 
             const nextRootReducer = require('../reducers/index');
-
-            console.warn(nextRootReducer);
+            console.warn('reducer replace',nextRootReducer);
 
             store.replaceReducer(reducers);
         });

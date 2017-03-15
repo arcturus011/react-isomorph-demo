@@ -98,6 +98,9 @@ let browserConfig = {
 
 
 let serverConfig = Object.assign({}, browserConfig, {
+    entry: {
+        index: './src/module/index/hot_entry.js',
+    },
     output: {
         path: path.join(__dirname, 'build_server'),
         filename: "[name].bundle.js",
@@ -140,4 +143,4 @@ let serverConfig = Object.assign({}, browserConfig, {
 });
 
 
-module.exports = [browserConfig];
+module.exports = [browserConfig,serverConfig];

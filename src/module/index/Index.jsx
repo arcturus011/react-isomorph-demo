@@ -27,7 +27,7 @@ export default class Layout extends React.Component {
                 resolve({
                     code: 200,
                     msg: 'success',
-                    data: ['111', '222']
+                    data: ['444', '222']
                 })
             }, 2000)
         });
@@ -92,33 +92,28 @@ export default class Layout extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log(10);
+        console.log('componentWillUnmount');
     }
 
     render() {
         return (
 
-            <Provider store={this.props.store}>
-                <div>
-                    <header>
-                        <h1 className="title">
-                            TodoList
-                        </h1>
-                    </header>
-                    <Comment handleAddComment={this.handleAddComment}/>
+            <div>
+                <header>
+                    <h1 className="title">
+                        TodoList
+                    </h1>
+                </header>
+                <Comment handleAddComment={this.handleAddComment}/>
 
-                    <TodoList onDelTodo={this.onDelTodo} todoList={this.props.todoList}/>
-                    <a href="https://github.com/larry011/react-isomorph-demo.git" className="dl"></a>
-                </div>
-            </Provider>
+                <TodoList onDelTodo={this.onDelTodo} todoList={this.props.todoList}/>
+                <a href="https://github.com/larry011/react-isomorph-demo.git" className="dl"></a>
+            </div>
         )
     }
 
 }
 
-Layout.propTypes = {
-    store: React.PropTypes.object.isRequired
-};
 
 Layout.contextTypes = {
     store: React.PropTypes.object
