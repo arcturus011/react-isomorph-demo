@@ -11,6 +11,25 @@ import configureStore from './store/index';
 import ReactDOM from 'react-dom';
 
 
+function mapDispatchToProps(dispatch) {
+    return {
+        addTodo: (todoArr) => dispatch({
+            type: 'ADD_TODO',
+            payload: todoArr
+        }),
+        delTodo: (todoIndex) => dispatch({
+            type: 'DEL_TODO',
+            payload: todoIndex
+
+        })
+    }
+}
+
+function mapStateToProps(state) {
+    return state;
+}
+
+
 if (process.browser) {
 
 
@@ -21,8 +40,13 @@ if (process.browser) {
 
         let store = configureStore(initialData);
 
-        let App = connect(_ => _)(Layout);//用connect包装一下，这里只用到mapStateToProps，而且不对state加以过滤
+        let App = connect(mapStateToProps, mapDispatchToProps)(Layout);//用connect包装一下，这里只用到mapStateToProps，而且不对state加以过滤
 
+        // =====================================================
+        //
+        //  hot reload 不要使用Provider！！！！
+        //
+        // =====================================================
 
         ReactDOM.render(
             <AppContainer>

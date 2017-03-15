@@ -36,15 +36,12 @@ export default class Layout extends React.Component {
 
     async componentDidMount() {
 
-        let {dispatch} = this.props;
+        let {addTodo} = this.props;
 
 
         let {data} = await this.fetchTodoList();
 
-        dispatch({
-            type: 'ADD_TODO',
-            payload: data
-        });
+        addTodo(data);
 
         /* this.setState({
          todoList: data
@@ -54,12 +51,10 @@ export default class Layout extends React.Component {
 
     handleAddComment(todo) {
 
-        let {dispatch} = this.props;
+        let {addTodo} = this.props;
 
-        dispatch({
-            type: 'ADD_TODO',
-            payload: [todo]
-        });
+        addTodo([todo]);
+
 
         /*  console.log(todo);
 
@@ -71,15 +66,13 @@ export default class Layout extends React.Component {
 
     onDelTodo(index) {
 
-        let {dispatch} = this.props;
 
+        let {delTodo} = this.props;
 
         console.log(index);
 
-        dispatch({
-            type: 'DEL_TODO',
-            payload: index
-        });
+
+        delTodo(index);
 
 
         /* let todoList = this.state.todoList.filter((val, i) => i !== index);
@@ -118,3 +111,8 @@ export default class Layout extends React.Component {
 Layout.contextTypes = {
     store: React.PropTypes.object
 };
+
+Layout.propTypes = {
+    addTodo: React.PropTypes.func.isRequired,
+    delTodo: React.PropTypes.func.isRequired,
+}
