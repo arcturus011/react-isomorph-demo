@@ -10,8 +10,7 @@ import configureStore from './store/index';
 
 import ReactDOM from 'react-dom';
 
-import mapDispatchToProps from './actions/index.js';
-
+import mapDispatchToProps from './action/index.js';
 
 
 function mapStateToProps(state) {
@@ -29,19 +28,24 @@ if (process.browser) {
 
         let store = configureStore(initialData);
 
-        let App = connect(mapStateToProps, mapDispatchToProps)(Layout);//用connect包装一下，这里只用到mapStateToProps，而且不对state加以过滤
+        let App = connect(mapStateToProps, mapDispatchToProps)(Layout);
 
         // =====================================================
         //
-        //  hot reload 不要使用Provider！！！！
+        //  hot reload 不要使用Provider！！！！，Provider不支持热更新store，直接传递store进去connect即可
         //
         // =====================================================
 
         ReactDOM.render(
+            //{/*<Provider >*/}
             <AppContainer>
                 <App store={store}/>
-            </AppContainer>,
-            document.getElementById('wrap'));
+            </AppContainer>
+            //{/*  </Provider>*/}
+            ,
+            document.getElementById('wrap')
+        )
+        ;
 
     };
 

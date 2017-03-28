@@ -18,9 +18,9 @@ let entry = {
         // bundle the client for webpack-dev-server
         // and connect to the provided endpoint
         // 'webpack/hot/only-dev-server',
-        './src/module/index/hot_entry.js',
+        './src/module/Home/hot_entry.js',
     ],
-    todoDetail: './src/module/TodoDetail/TodoDetail.jsx'
+    // todoDetail: './src/module/TodoDetail/TodoDetail.jsx'
 };
 
 //浏览器端的配置
@@ -99,7 +99,7 @@ let browserConfig = {
 
 let serverConfig = Object.assign({}, browserConfig, {
     entry: {
-        index: './src/module/index/hot_entry.js',
+        index: './src/module/Home/hot_entry.js',
     },
     output: {
         path: path.join(__dirname, 'build_server'),

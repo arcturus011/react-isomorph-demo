@@ -3,9 +3,9 @@ import 'regenerator-runtime/runtime';
 import './stylus/index.styl';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
-import bs from '../common/bs';
+// import bs from '../common/bs';
 import Provider from "react-redux/src/components/Provider";
-
+import todoModel from './model/todo';
 
 // @bs
 export default class Layout extends React.Component {
@@ -21,31 +21,14 @@ export default class Layout extends React.Component {
          }*/
     }
 
-    fetchTodoList() {
-        return new Promise((resolve, reject) => {
-            setTimeout(_ => {
-                resolve({
-                    code: 200,
-                    msg: 'success',
-                    data: ['444', '222']
-                })
-            }, 2000)
-        });
-    }
+
+    componentDidMount() {
+
+        let {addTodo, fetchTodoList, store} = this.props;
 
 
-    async componentDidMount() {
+        store.dispatch(fetchTodoList());
 
-        let {addTodo} = this.props;
-
-
-        let {data} = await this.fetchTodoList();
-
-        addTodo(data);
-
-        /* this.setState({
-         todoList: data
-         })*/
 
     }
 
@@ -89,12 +72,14 @@ export default class Layout extends React.Component {
     }
 
     render() {
+
+        let {todoStatus} = this.props;
         return (
 
             <div>
                 <header>
                     <h1 className="title">
-                        TodoList
+                        {todoStatus.pending ? 'loading...' : 'TodoList'}
                     </h1>
                 </header>
                 <Comment handleAddComment={this.handleAddComment}/>
@@ -115,4 +100,5 @@ Layout.contextTypes = {
 Layout.propTypes = {
     addTodo: React.PropTypes.func.isRequired,
     delTodo: React.PropTypes.func.isRequired,
+    fetchTodoList: React.PropTypes.func.isRequired
 }

@@ -22,7 +22,7 @@ export default class TodoItem extends React.Component {
         let {todo} = this.props;
         return (
             <li className="todo-list-item">
-                <p>{todo}</p>
+                {todo.done ? <del><p>{todo.content}</p></del> : <p>{todo.content}</p>}
                 <button onClick={this.del.bind(this)} className="pure-button">X</button>
             </li>
         )
@@ -33,5 +33,5 @@ export default class TodoItem extends React.Component {
 
 TodoItem.propTypes = {
     handleDelTodo: React.PropTypes.func.isRequired,
-    todo: React.PropTypes.string.isRequired
+    todo: React.PropTypes.object.isRequired
 }
