@@ -4,6 +4,8 @@
 
 export const ADD_TODO = 'ADD_TODO';
 export const DEL_TODO = 'DEL_TODO';
+export const MARK_TODO_DONE = 'MARK_TODO_DONE';
+
 export const FETCH_TODO_LIST_SUCCESS = 'FETCH_TODO_LIST_SUCCESS';
 export const FETCH_TODO_LIST_PENDING = 'FETCH_TODO_LIST_PENDING';
 export const FETCH_TODO_LIST_FAILED = 'FETCH_TODO_LIST_FAILED';
@@ -42,6 +44,13 @@ export default  function mapDispatchToProps(dispatch) {
                     });
                 })
             }
+        },
+        markTodoDone: (todoID) => {
+            dispatch({
+                type: MARK_TODO_DONE,
+                payload: todoID
+
+            })
         }
     }
 }

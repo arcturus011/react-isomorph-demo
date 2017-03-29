@@ -4,10 +4,8 @@ import './stylus/index.styl';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
 // import bs from '../common/bs';
-import Provider from "react-redux/src/components/Provider";
 import todoModel from './model/todo';
 
-// @bs
 export default class Layout extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +17,10 @@ export default class Layout extends React.Component {
         /*this.state = {
          todoList: []
          }*/
+    }
+
+    getChildContext() {
+        return {store: this.props.store};
     }
 
 
@@ -39,12 +41,6 @@ export default class Layout extends React.Component {
         addTodo([todo]);
 
 
-        /*  console.log(todo);
-
-         this.setState({
-         todoList: [...this.state.todoList, todo]
-         })*/
-
     }
 
     onDelTodo(index) {
@@ -56,13 +52,6 @@ export default class Layout extends React.Component {
 
 
         delTodo(index);
-
-
-        /* let todoList = this.state.todoList.filter((val, i) => i !== index);
-
-         this.setState({
-         todoList
-         });*/
 
 
     }
@@ -93,7 +82,7 @@ export default class Layout extends React.Component {
 }
 
 
-Layout.contextTypes = {
+Layout.childContextTypes = {
     store: React.PropTypes.object
 };
 
