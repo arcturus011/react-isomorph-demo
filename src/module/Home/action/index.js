@@ -2,15 +2,15 @@
  * Created by chenchen on 2017/3/15.
  */
 
-export const ADD_TODO = 'ADD_TODO';
-export const DEL_TODO = 'DEL_TODO';
-export const MARK_TODO_DONE = 'MARK_TODO_DONE';
-
-export const FETCH_TODO_LIST_SUCCESS = 'FETCH_TODO_LIST_SUCCESS';
-export const FETCH_TODO_LIST_PENDING = 'FETCH_TODO_LIST_PENDING';
-export const FETCH_TODO_LIST_FAILED = 'FETCH_TODO_LIST_FAILED';
-
-import todoModel from '../model/todo';
+// export const ADD_TODO = 'ADD_TODO';
+// export const DEL_TODO = 'DEL_TODO';
+// export const MARK_TODO_DONE = 'MARK_TODO_DONE';
+//
+// export const FETCH_TODO_LIST_SUCCESS = 'FETCH_TODO_LIST_SUCCESS';
+// export const FETCH_TODO_LIST_PENDING = 'FETCH_TODO_LIST_PENDING';
+// export const FETCH_TODO_LIST_FAILED = 'FETCH_TODO_LIST_FAILED';
+//
+// import todoModel from '../model/todo';
 
 
 export default  function mapDispatchToProps(dispatch) {
@@ -25,6 +25,7 @@ export default  function mapDispatchToProps(dispatch) {
 
         }),
         fetchTodoList: () => {
+/*
             return dispatch => {
                 dispatch({
                     type: FETCH_TODO_LIST_PENDING
@@ -44,6 +45,7 @@ export default  function mapDispatchToProps(dispatch) {
                     });
                 })
             }
+*/
         },
         markTodoDone: (todoID) => {
             dispatch({

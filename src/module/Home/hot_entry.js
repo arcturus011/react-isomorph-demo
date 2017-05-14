@@ -5,8 +5,8 @@ import React from 'react';
 import Layout from './Index.jsx';
 import {connect, Provider} from 'react-redux';
 import {AppContainer} from 'react-hot-loader';
+import Immutable from 'seamless-immutable';
 
-import configureStore from './store/index';
 
 import ReactDOM from 'react-dom';
 
@@ -17,18 +17,21 @@ function mapStateToProps(state) {
     return state;
 }
 
+console.warn(module);
 
 if (process.browser) {
 
 
     let render = _ => {
 
+        const configureStore = require('./store/index').default;
 
-        let initialData = window._SERVER_DATA || {};
 
-        let store = configureStore(initialData);
+        let initialData = Immutable(window._SERVER_DATA || {});
 
-        let App = connect(mapStateToProps, mapDispatchToProps)(Layout);
+        let store = configureStore(undefined);
+
+        let App = connect(mapStateToProps)(Layout);
 
         // =====================================================
         //

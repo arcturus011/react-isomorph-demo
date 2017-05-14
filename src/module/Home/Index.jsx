@@ -3,8 +3,18 @@ import 'regenerator-runtime/runtime';
 import './stylus/index.styl';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
-// import bs from '../common/bs';
 import todoModel from './model/todo';
+import configureStore from './store/index';
+
+import ReactDOM from 'react-dom';
+
+// import mapDispatchToProps from './action/index.js';
+
+
+function mapStateToProps(state) {
+    return state;
+}
+
 
 export default class Layout extends React.Component {
     constructor(props) {
@@ -29,7 +39,12 @@ export default class Layout extends React.Component {
         let {addTodo, fetchTodoList, store} = this.props;
 
 
-        store.dispatch(fetchTodoList());
+        // store.dispatch(fetchTodoList());
+
+        store.dispatch({
+            type: 'todolist/request',
+            payload: {}
+        })
 
 
     }
@@ -68,7 +83,7 @@ export default class Layout extends React.Component {
             <div>
                 <header>
                     <h1 className="title">
-                        {todoStatus.pending ? 'loading...' : 'TodoList'}
+                        {todoStatus.pending ? 'loading.1..' : 'TodoList'}
                     </h1>
                 </header>
                 <Comment handleAddComment={this.handleAddComment}/>

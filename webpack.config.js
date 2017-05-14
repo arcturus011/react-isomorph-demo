@@ -94,6 +94,7 @@ let browserConfig = {
     //     hot: true,
     //     // enable HMR on the server
     // },
+    devtool:'source-map'
 };
 
 

@@ -3,8 +3,11 @@
  */
 
 
-import {combineReducers} from 'redux';
-import {FETCH_TODO_LIST_SUCCESS, FETCH_TODO_LIST_PENDING, FETCH_TODO_LIST_FAILED} from '../action/index';
+// import {combineReducers} from 'redux';
+// import {FETCH_TODO_LIST_SUCCESS, FETCH_TODO_LIST_PENDING, FETCH_TODO_LIST_FAILED} from '../action/index';
+
+import Immutable from 'seamless-immutable';
+
 
 function todoList(todolist = [], action) {
     switch (action.type) {
@@ -38,5 +41,19 @@ function todoStatus(status = {pending: false}, action) {
 
 }
 
+function reducer(state = Immutable({
+    todoList: [],
+    todoStatus: {
+        pending: false,
+        error:false
+    }
+}), action) {
+    console.log(action);
 
-export default combineReducers({todoList, todoStatus});
+
+    return state.merge(action.payload || {}, {deep: true});
+}
+
+// export default combineReducers({todoList, todoStatus});
+
+export default reducer;
