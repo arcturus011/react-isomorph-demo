@@ -5,7 +5,6 @@ const path = require('path');
 const webpack = require("webpack");
 const htmlWebapckPluginConfig = require("./src/config/html-webpack-plugin.config");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const autoRefresh = require('./src/config/browser-sync.config.js');
 const nodeExternals = require('webpack-node-externals');
 
 //入口文件
@@ -27,7 +26,7 @@ let entry = {
 let browserConfig = {
     entry,
     output: {
-        path: path.join(__dirname, 'build'),
+        path: path.join(__dirname, 'dist'),
         publicPath: '/',
         filename: "js/[name].bundle.js",
         chunkFilename: "js/[id].bundle.js"
@@ -47,28 +46,45 @@ let browserConfig = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: "babel-loader"
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            cacheDirectory: true
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(styl|css)$/,
-                loader: "vue-style!css?sourceMap!autoprefixer!stylus"
-                // loader: ExtractTextPlugin.extract({
-                //     fallback: "vue-style-loader",
-                //     use: "css?sourceMap!autoprefixer!stylus"
-                // })
+                use: [
+                    "vue-style-loader",
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                    },
+                    {
+                        loader: 'stylus-loader'
+                    }
+                ]
             },
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
-            filename: 'js/common.js',
-        }),
+        /*        new webpack.optimize.CommonsChunkPlugin({
+                    name: 'common',
+                    filename: 'js/common.js',
+                }),*/
         new webpack.ProvidePlugin({
             React: 'react',
             ReactDOM: 'react-dom',
             fetch: 'isomorphic-fetch',
-            Promise: 'promise'
+            Promise: 'bluebird'
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('development')
@@ -84,17 +100,6 @@ let browserConfig = {
     resolveLoader: {
         moduleExtensions: ["-loader"]
     },
-    // devServer: {
-    //     host: 'localhost',
-    //     port: 23456,
-    //
-    //     historyApiFallback: true,
-    //     // respond to 404s with index.html
-    //
-    //     hot: true,
-    //     // enable HMR on the server
-    // },
-    devtool:'source-map'
 };
 
 
@@ -144,4 +149,4 @@ let serverConfig = Object.assign({}, browserConfig, {
 });
 
 
-module.exports = [browserConfig,serverConfig];
+module.exports = [browserConfig];

@@ -44,7 +44,14 @@ export default class Layout extends React.Component {
         store.dispatch({
             type: 'todolist/request',
             payload: {}
-        })
+        });
+
+        store.dispatch({
+            type: 'USER_FETCH_REQUESTED',
+            payload: {}
+        });
+
+
 
 
     }
