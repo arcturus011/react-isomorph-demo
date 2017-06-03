@@ -11,7 +11,10 @@ React + Redux + Koa + SSR 小例子
 - [x] 使用`babel-preset-env`代替`babel-preset-es2015`
 
 
-###HMR
+###HMR 
+
+具体在`/server/README.MD`
+
 - [x] 使用`webpack-dev-server` CLI来实现HMR
 - [x] 使用`koa-webpack` 来实现 HMR
 - [ ] 整合`koa-webpack` 和`SSR服务`
