@@ -1,6 +1,6 @@
 module.exports = {
     plugins: {
         'autoprefixer': {},
-        // 'stylelint': {}
+        'postcss-px2rem': {remUnit: 100}
     }
 }
