@@ -7,7 +7,7 @@ React + Redux + Koa + SSR 小例子
 ##TODO
 
 ###开发
-- [ ] 使用`Redux-saga`管理状态 
+- [ ] 使用`redux-saga`管理状态 
 - [x] 使用`babel-preset-env`代替`babel-preset-es2015`
 
 
@@ -22,7 +22,8 @@ React + Redux + Koa + SSR 小例子
 
 ###CSS
 - [x] 使用`PostCSS-loader`代替`autoprefixer-loader`
-- [ ] 使用REM
+- [x] 使用REM
+- [x] 使用px2rem插件自动转换px
 - [ ] 使用CSS Module
 
 
