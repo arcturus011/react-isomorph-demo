@@ -22,6 +22,7 @@ React + Redux + Koa + SSR 小例子
 
 ###CSS
 - [x] 使用`PostCSS-loader`代替`autoprefixer-loader`
+- [ ] 使用REM
 - [ ] 使用CSS Module
 
 

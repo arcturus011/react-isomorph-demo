@@ -5,7 +5,7 @@ import TodoList from './component/TodoList';
 import Comment from './component/Comment';
 import todoModel from './model/todo';
 import configureStore from './store/index';
-
+import '../common/rem';
 import ReactDOM from 'react-dom';
 
 // import mapDispatchToProps from './action/index.js';
