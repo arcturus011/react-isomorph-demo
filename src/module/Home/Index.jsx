@@ -3,7 +3,7 @@ import 'regenerator-runtime/runtime';
 import './stylus/index.styl';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
-import todoModel from './model/todo';
+import {fetchList} from './service/todo';
 import configureStore from './store/index';
 import '../common/rem';
 import ReactDOM from 'react-dom';
@@ -22,11 +22,6 @@ export default class Layout extends React.Component {
 
 
         this.handleAddComment = this.handleAddComment.bind(this);
-        this.onDelTodo = this.onDelTodo.bind(this);
-
-        /*this.state = {
-         todoList: []
-         }*/
     }
 
     getChildContext() {
@@ -39,19 +34,9 @@ export default class Layout extends React.Component {
         let {addTodo, fetchTodoList, store} = this.props;
 
 
-        // store.dispatch(fetchTodoList());
-
         store.dispatch({
-            type: 'todolist/request',
-            payload: {}
+            type: 'todolist/fetch',
         });
-
-        store.dispatch({
-            type: 'USER_FETCH_REQUESTED',
-            payload: {}
-        });
-
-
 
 
     }
@@ -84,18 +69,18 @@ export default class Layout extends React.Component {
 
     render() {
 
-        let {todoStatus} = this.props;
+        let {todoStatus, todoList} = this.props;
         return (
 
             <div>
                 <header>
                     <h1 className="title">
-                        {todoStatus.pending ? 'loading.1..' : 'TodoList'}
+                        {todoStatus.pending ? 'loading...' : 'TodoList'}
                     </h1>
                 </header>
                 <Comment handleAddComment={this.handleAddComment}/>
 
-                <TodoList onDelTodo={this.onDelTodo} todoList={this.props.todoList}/>
+                <TodoList onDelTodo={this.onDelTodo} todoList={todoList}/>
                 <a href="https://github.com/larry011/react-isomorph-demo.git" className="dl"></a>
             </div>
         )
@@ -108,8 +93,3 @@ Layout.childContextTypes = {
     store: React.PropTypes.object
 };
 
-Layout.propTypes = {
-    addTodo: React.PropTypes.func.isRequired,
-    delTodo: React.PropTypes.func.isRequired,
-    fetchTodoList: React.PropTypes.func.isRequired
-}

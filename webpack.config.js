@@ -7,24 +7,14 @@ const htmlWebapckPluginConfig = require("./src/config/html-webpack-plugin.config
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const nodeExternals = require('webpack-node-externals');
 
-//入口文件
-let entry = {
-    index: [
-        'react-hot-loader/patch',
-        // activate HMR for React
-        // 'webpack-dev-server/client?http://localhost:23456', //原始的dev-server
-        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000',
-        // bundle the client for webpack-dev-server
-        // and connect to the provided endpoint
-        // 'webpack/hot/only-dev-server',
-        './src/module/Home/hot_entry.js',
-    ],
-    // todoDetail: './src/module/TodoDetail/TodoDetail.jsx'
-};
 
 //浏览器端的配置
 let browserConfig = {
-    entry,
+    context: __dirname,
+    entry: {
+        index: './src/module/Home/hot_entry.js',
+        // todoDetail: './src/module/TodoDetail/TodoDetail.jsx'
+    },
     output: {
         path: path.join(__dirname, 'dist'),
         publicPath: '/',
@@ -103,50 +93,4 @@ let browserConfig = {
 };
 
 
-let serverConfig = Object.assign({}, browserConfig, {
-    entry: {
-        index: './src/module/Home/hot_entry.js',
-    },
-    output: {
-        path: path.join(__dirname, 'build_server'),
-        filename: "[name].bundle.js",
-        libraryTarget: 'commonjs2' //设置导出类型，web端默认是var，node需要module.exports = xxx的形式
-    },
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: "babel-loader",
-                query: {                //node端的babel编译配置可以简化很多
-                    babelrc: "false",
-                    presets: ['react'],
-                    plugins: [
-                        "transform-decorators-legacy",
-                        "transform-es2015-modules-commonjs" //如果不转换成require，import 'xxx.styl'会报错
-                    ]
-                }
-            },
-            {
-                test: /\.(styl|css)$/,          //node端不能 require('xx.css')，会报错
-                loader: 'null'
-            },
-        ]
-    },
-    plugins: [
-        new webpack.ProvidePlugin({
-            React: 'react',
-            ReactDOM: 'react-dom',
-            fetch: 'isomorphic-fetch',
-            Promise: 'promise'
-        }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || JSON.stringify('development')
-        }),
-    ],
-    target: 'node',
-    externals: [nodeExternals()], //不把node_modules中的文件打包
-});
-
-
-module.exports = [browserConfig];
+module.exports = browserConfig;
