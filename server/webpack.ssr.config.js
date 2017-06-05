@@ -23,7 +23,7 @@ let serverConfig = {
                         babelrc: false,
                         presets: ['react',
                             ['env', {
-                                debug: true,
+                                // debug: true,
                                 "targets": {
                                     node: 'current',
                                     // modules: false

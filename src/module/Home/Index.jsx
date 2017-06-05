@@ -3,10 +3,7 @@ import 'regenerator-runtime/runtime';
 import './stylus/index.styl';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
-import {fetchList} from './service/todo';
-import configureStore from './store/index';
 import '../common/rem';
-import ReactDOM from 'react-dom';
 
 // import mapDispatchToProps from './action/index.js';
 
