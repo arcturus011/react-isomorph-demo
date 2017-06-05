@@ -20,8 +20,9 @@ let moduleState = {
 
 function reducerEntry(state = Immutable(moduleState), action) {
 
-    console.log(state, action);
 
+    console.info(action);
+    //每次dispatch action都会调用reducer,有些是给saga用的action，这里要过滤一下
 
     if (action.type && mainReducer[action.type]) {
 

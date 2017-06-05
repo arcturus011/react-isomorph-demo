@@ -38,7 +38,6 @@ export default class Layout extends React.Component {
             type: 'todolist/fetch',
         });
 
-
     }
 
     handleAddComment(todo) {

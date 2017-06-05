@@ -13,7 +13,7 @@ export default class TodoItem extends React.Component {
     del() {
         let {index} = this.props;
 
-        this.props.handleDelTodo(index);
+        // this.props.handleDelTodo(index);
 
 
     }
@@ -35,4 +35,8 @@ export default class TodoItem extends React.Component {
 TodoItem.propTypes = {
     handleDelTodo: React.PropTypes.func.isRequired,
     todo: React.PropTypes.object.isRequired
+};
+
+TodoItem.contextTypes = {
+    store: React.PropTypes.any
 }

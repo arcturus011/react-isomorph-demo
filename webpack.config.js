@@ -54,12 +54,19 @@ let browserConfig = {
                         options: {
                             sourceMap: true
                         }
+
                     },
                     {
                         loader: 'postcss-loader',
+                        options: {
+                            sourceMap: false
+                        }
                     },
                     {
-                        loader: 'stylus-loader'
+                        loader: 'stylus-loader',
+                        options: {
+                            sourceMap: false
+                        }
                     }
                 ]
             },
@@ -90,6 +97,7 @@ let browserConfig = {
     resolveLoader: {
         moduleExtensions: ["-loader"]
     },
+    devtool: 'source-map'
 };
 
 
