@@ -5,12 +5,11 @@ import {call, put, takeEvery, takeLatest, fork} from 'redux-saga/effects'
 import * as SERVICE from '../service/todo';
 
 
-function* fetchTodo(action) {
+export function* fetchTodo(action) {
 
-    let listData = yield call(SERVICE.fetchList);
+    let {result: listData} = yield call(SERVICE.fetchList, 1);
     console.log(listData);
 
-    return ;
     yield  put({
         type: 'initList',
         payload: {
@@ -19,6 +18,9 @@ function* fetchTodo(action) {
     })
 }
 
+export function requestAddTodo() {
+
+}
 
 export default function* saga() {
 

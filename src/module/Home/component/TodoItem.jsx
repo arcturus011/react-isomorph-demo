@@ -10,11 +10,17 @@ export default class TodoItem extends React.Component {
 
     }
 
-    del() {
-        let {index} = this.props;
+    handleDel() {
+        // let {index} = this.props;
+        let {todo} = this.props;
+        let {store} = this.context;
 
-        // this.props.handleDelTodo(index);
-
+        store.dispatch({
+            type: "delTodo",
+            payload: {
+                id: todo.id
+            }
+        })
 
     }
 
@@ -23,7 +29,7 @@ export default class TodoItem extends React.Component {
         return (
             <li className="todo-list-item">
                 {todo.done ? <del><p>{todo.content}</p></del> : <p>{todo.content}</p>}
-                <button onClick={this.del.bind(this)} className="pure-button"><i className="iconfont icon-delete"></i>
+                <button onClick={this.handleDel.bind(this)} className="pure-button"><i className="iconfont icon-delete"></i>
                 </button>
             </li>
         )
@@ -33,7 +39,6 @@ export default class TodoItem extends React.Component {
 
 
 TodoItem.propTypes = {
-    handleDelTodo: React.PropTypes.func.isRequired,
     todo: React.PropTypes.object.isRequired
 };
 

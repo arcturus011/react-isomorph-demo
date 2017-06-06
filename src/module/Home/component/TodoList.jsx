@@ -4,19 +4,10 @@ import TodoItem from './TodoItem';
 export default class TodoList extends React.Component {
     constructor(props) {
         super(props);
-
-
-        this.handleDelTodo = this.handleDelTodo.bind(this);
-
     }
 
     componentDidMount() {
 
-    }
-
-    handleDelTodo(index) {
-
-        this.props.onDelTodo(index);
     }
 
     render() {
@@ -28,7 +19,7 @@ export default class TodoList extends React.Component {
                 <ul className="todo-list ">
                     {this.props.todoList.map((todo, index) => {
                         return (
-                            <TodoItem key={index} todo={todo} index={index} handleDelTodo={this.handleDelTodo}/>
+                            <TodoItem key={index} todo={todo} index={index}/>
                         )
                     })}
                 </ul>
@@ -40,5 +31,4 @@ export default class TodoList extends React.Component {
 
 TodoList.propTypes = {
     todoList: React.PropTypes.array.isRequired,
-    onDelTodo: React.PropTypes.func.isRequired
 };

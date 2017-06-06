@@ -2,11 +2,14 @@ export function addTodo(state, action) {
 
 }
 
-export function delTodo() {
+export function delTodo(state, {payload: {id}}) {
+
+
+    return state.set('todoList', (state.todoList.filter(val => val.id != id)));
 
 }
 
-export function updateTodo() {
+export function updateTodo(state, action) {
 
 }
 

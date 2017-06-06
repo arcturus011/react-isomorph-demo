@@ -2,5 +2,5 @@
 .gitignore
 .idea/
 node_modules
-/dist
-/dist_server
+dist/
+dist_server/

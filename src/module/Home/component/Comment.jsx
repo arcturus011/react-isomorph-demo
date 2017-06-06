@@ -21,9 +21,6 @@ export default class Comment extends React.Component {
 
         if (!text) return false;
 
-        this.props.handleAddComment(text);
-
-
         this.commentInput.value = '';
 
     }
@@ -42,6 +39,6 @@ export default class Comment extends React.Component {
 
 }
 
-Comment.propTypes = {
-    handleAddComment: React.PropTypes.func.isRequired
+Comment.contextTypes = {
+    store: React.PropTypes.object
 }

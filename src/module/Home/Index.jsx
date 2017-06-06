@@ -13,12 +13,10 @@ function mapStateToProps(state) {
 }
 
 
-export default class Layout extends React.Component {
+export default class Index extends React.Component {
     constructor(props) {
         super(props);
 
-
-        this.handleAddComment = this.handleAddComment.bind(this);
     }
 
     getChildContext() {
@@ -37,27 +35,6 @@ export default class Layout extends React.Component {
 
     }
 
-    handleAddComment(todo) {
-
-        let {addTodo} = this.props;
-
-        addTodo([todo]);
-
-
-    }
-
-    onDelTodo(index) {
-
-
-        let {delTodo} = this.props;
-
-        console.log(index);
-
-
-        delTodo(index);
-
-
-    }
 
     componentWillUnmount() {
         console.log('componentWillUnmount');
@@ -74,9 +51,9 @@ export default class Layout extends React.Component {
                         {todoStatus.pending ? 'loading...' : 'TodoList'}
                     </h1>
                 </header>
-                <Comment handleAddComment={this.handleAddComment}/>
+                <Comment/>
 
-                <TodoList onDelTodo={this.onDelTodo} todoList={todoList}/>
+                <TodoList todoList={todoList}/>
                 <a href="https://github.com/larry011/react-isomorph-demo.git" className="dl"></a>
             </div>
         )
@@ -85,7 +62,7 @@ export default class Layout extends React.Component {
 }
 
 
-Layout.childContextTypes = {
+Index.childContextTypes = {
     store: React.PropTypes.object
 };
 

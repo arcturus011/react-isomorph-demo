@@ -4,7 +4,7 @@
 
 import Mock from 'mockjs';
 
-export function fetchList() {
+export function fetchList(page) {
     return Promise.delay(1000).then(() => {
         let {list} = Mock.mock({
             // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
@@ -22,7 +22,7 @@ export function fetchList() {
             msg: 'success',
             result: {
                 list,
-                page: 1,
+                page,
                 total: list.length
             }
         });
