@@ -7,7 +7,7 @@ React + Redux + Koa + SSR 小例子
 ##TODO
 
 ###开发
-- [ ] 使用`redux-saga`管理状态 
+- [x] 使用`redux-saga`管理状态 
 - [x] 使用`babel-preset-env`代替`babel-preset-es2015`
 
 
@@ -34,8 +34,9 @@ React + Redux + Koa + SSR 小例子
 
 
 ###测试
-- [ ] 添加`mocha`单元测试
-- [ ] 使用`gulp`管理`mocha`单元测试
+- [x] <del>添加`mocha`单元测试</del>
+- [x] 添加`ava`单元测试
+- [x] 使用`gulp`管理`ava`单元测试
 - [ ] 使用`Selenium`进行E2E测试
 
 

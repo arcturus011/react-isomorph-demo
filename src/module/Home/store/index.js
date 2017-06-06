@@ -2,10 +2,8 @@
  * Created by chenchen on 2017/3/7.
  */
 
-import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
-import reducers from '../reducer/';
-import thunkMiddleware from 'redux-thunk';
-// import {createLogger} from 'redux-logger';
+import {createStore, applyMiddleware, compose} from 'redux';
+import reducers from '../reducer/index';
 
 import createSagaMiddleware from 'redux-saga'
 import mySaga from '../saga/index';

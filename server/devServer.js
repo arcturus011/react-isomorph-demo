@@ -23,6 +23,12 @@ config.entry = _.mapValues(config.entry, val => [
     val
 ]);
 
+config.plugins = config.plugins.concat([
+    new webpack.HotModuleReplacementPlugin(),
+    // enable HMR globally
+
+    new webpack.NamedModulesPlugin(),
+]);
 
 app.use(webpackMiddleware({
     config: config,

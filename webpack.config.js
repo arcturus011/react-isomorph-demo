@@ -12,7 +12,7 @@ const nodeExternals = require('webpack-node-externals');
 let browserConfig = {
     context: __dirname,
     entry: {
-        index: './src/module/Home/hot_entry.js',
+        index: './src/module/Home/Index-entry.js',
         // todoDetail: './src/module/TodoDetail/TodoDetail.jsx'
     },
     output: {
@@ -88,11 +88,6 @@ let browserConfig = {
         }),
         // new ExtractTextPlugin('css/[name].css'),
         ...htmlWebapckPluginConfig,
-        new webpack.HotModuleReplacementPlugin(),
-        // enable HMR globally
-
-        new webpack.NamedModulesPlugin(),
-        // autoRefresh
     ],
     resolveLoader: {
         moduleExtensions: ["-loader"]

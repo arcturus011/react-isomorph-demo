@@ -5,10 +5,10 @@
 
 import Immutable from 'seamless-immutable';
 
-import * as todoListReducer from './todoList';
+import * as todoListReducer from './todo-list';
 
 
-let mainReducer = Object.assign({}, todoListReducer);
+let combinedReducer = Object.assign({}, todoListReducer);
 
 let moduleState = {
     todoList: [],
@@ -24,17 +24,15 @@ function reducerEntry(state = Immutable(moduleState), action) {
     console.info(action);
     //每次dispatch action都会调用reducer,有些是给saga用的action，这里要过滤一下
 
-    if (action.type && mainReducer[action.type]) {
+    if (action.type && combinedReducer[action.type]) {
 
 
-        return mainReducer[action.type](state, action);
+        return combinedReducer[action.type](state, action);
 
     }
 
     return state;
 
-
-    // return state.merge(action.payload || {}, {deep: true});
 }
 
 

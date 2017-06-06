@@ -8,10 +8,11 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import test from 'ava';
 import cheerio from 'cheerio';
-
-let {renderToString} = ReactDOMServer;
 import indexBundle from '../../server/dist_server/index.ssr';
 import {expect} from 'chai';
+
+let {renderToString} = ReactDOMServer;
+
 
 test('ssr测试', async t => {
 
@@ -32,7 +33,7 @@ test('ssr测试', async t => {
 
     let str = renderToString(instance);
 
-    // console.log(str);
+    console.log(str);
 
     expect(str).to.not.be.empty;
 
@@ -45,5 +46,5 @@ test('ssr测试', async t => {
 });
 
 
-test.todo('TODO::SPA情况下SSR测试');
+// test.todo('TODO::SPA情况下SSR测试');
 
