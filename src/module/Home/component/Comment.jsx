@@ -17,9 +17,18 @@ export default class Comment extends React.Component {
 
     add() {
 
+        let {store} = this.context;
+
         let text = this.commentInput.value;
 
         if (!text) return false;
+
+        store.dispatch({
+            type: 'todo/add/request',
+            payload: {
+                content: text
+            }
+        });
 
         this.commentInput.value = '';
 

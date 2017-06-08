@@ -48,9 +48,7 @@ router.get('/', async (ctx, next) => {
     let IndexBundle = require("./dist_server/index.ssr");
 
     //fetch接口数据
-    let todoList = await(await fetch('http://localhost:8088/api/todo_list')).json();
-
-    let initialData = {todoList};
+    let {data: initialData} = await axios.get('http://localhost:8088/api/todo_list');
 
     let instance = React.createElement(IndexBundle.default, initialData);
 
@@ -74,7 +72,16 @@ router.get('/', async (ctx, next) => {
 router.get('/api/todo_list', async (ctx, next) => {
 
     return ctx.body = {
-
+        todoList: [{
+            content: "Mewnxuacir lfq lqbemwwbf.",
+            createTime: "1992-07-12",
+            done: true,
+            id: 1,
+        }],
+        todoStatus: {
+            pending: false,
+            error: false
+        }
     };
 
 });

@@ -35,7 +35,10 @@ export function addTodo(content) {
     return Promise.delay(800).then(() => {
         return {
             code: 200,
-            msg: 'success'
+            msg: 'success',
+            result: {
+                id: parseInt(Math.random() * 100)
+            }
         }
     });
 }

@@ -1,5 +1,6 @@
 export function addTodo(state, action) {
 
+    return state.set('todoList', state.todoList.concat(action.payload));
 }
 
 export function delTodo(state, {payload: {id}}) {

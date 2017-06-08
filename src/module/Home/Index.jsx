@@ -6,13 +6,6 @@ import Comment from './component/Comment';
 import '../common/rem';
 import PropTypes from 'prop-types';
 
-// import mapDispatchToProps from './action/index.js';
-
-
-function mapStateToProps(state) {
-    return state;
-}
-
 
 export default class Index extends React.Component {
     constructor(props) {
@@ -27,12 +20,14 @@ export default class Index extends React.Component {
 
     componentDidMount() {
 
-        let {addTodo, fetchTodoList, store} = this.props;
+        let {store, todoList} = this.props;
 
 
-        store.dispatch({
-            type: 'todolist/fetch',
-        });
+        //todo::如果服务端没有提供数据，ajax请求获取
+        if (todoList.length == 0)
+            store.dispatch({
+                type: 'todolist/pull/request',
+            });
 
     }
 

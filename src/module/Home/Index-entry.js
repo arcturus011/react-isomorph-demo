@@ -5,7 +5,6 @@ import React from 'react';
 import Layout from './Index.jsx';
 import {connect, Provider} from 'react-redux';
 import {AppContainer} from 'react-hot-loader';
-import Immutable from 'seamless-immutable';
 import ReactDOM from 'react-dom';
 import configureStore from './store/index'
 
@@ -21,9 +20,9 @@ if (process.browser) {
     let render = _ => {
 
 
-        let initialData = Immutable(window._SERVER_DATA || {});
+        let initialData = window._SERVER_DATA || null;
 
-        let store = configureStore();
+        let store = configureStore(initialData);
 
         let App = connect(mapStateToProps)(Layout);
 

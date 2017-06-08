@@ -18,13 +18,34 @@ export function* fetchTodo(action) {
     })
 }
 
+
+export function* addTodo({payload}) {
+
+    let {result} = yield  call(SERVICE.addTodo, payload.content);
+
+    yield put({
+        type: 'addTodo',
+        payload: {
+            id: result.id,
+            content: payload.content,
+            createTime: Date.now(),
+            done: false
+        }
+    })
+
+    console.log(result)
+
+}
+
 export function requestAddTodo() {
 
 }
 
 export default function* saga() {
 
-    yield takeEvery("todolist/fetch", fetchTodo);
+    yield takeEvery("todolist/pull/request", fetchTodo);
+
+    yield takeEvery("todo/add/request", addTodo);
 
 }
 
