@@ -4,6 +4,7 @@ import './stylus/index.styl';
 import TodoList from './component/TodoList';
 import Comment from './component/Comment';
 import '../common/rem';
+import PropTypes from 'prop-types';
 
 // import mapDispatchToProps from './action/index.js';
 
@@ -52,7 +53,6 @@ export default class Index extends React.Component {
                     </h1>
                 </header>
                 <Comment/>
-
                 <TodoList todoList={todoList}/>
                 <a href="https://github.com/larry011/react-isomorph-demo.git" className="dl"></a>
             </div>
@@ -63,6 +63,6 @@ export default class Index extends React.Component {
 
 
 Index.childContextTypes = {
-    store: React.PropTypes.object
+    store: PropTypes.object
 };
 

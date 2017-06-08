@@ -8,7 +8,8 @@
     "watch": "webpack -d -w --progress --colors",
     "dev-server-koa": "node --harmony server/devServer",
     "dist": "cross-env NODE_ENV='production' webpack -p",
-    "dist-ssr-bundle": "cross-env NODE_ENV='production' webpack --config ./server/webpack.ssr.config.js"
+    "dist-ssr-bundle": "cross-env NODE_ENV='production' webpack --config ./server/webpack.ssr.config.js",
+    "test": "gulp --gulpfile  ./__TEST__/gulpfile.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "babel-preset-react": "^6.22.0",
     "chai": "^4.0.1",
     "cross-env": "^3.1.4",
+    "cross-npm-spawn": "^1.1.1",
     "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.0",
