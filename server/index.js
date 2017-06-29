@@ -10,8 +10,8 @@ const path = require("path");
 const Promise = require("bluebird");
 const serve = require('koa-static-server');
 const readFileAsync = Promise.promisify(fs.readFile);
-const RES_PATH = path.resolve(__dirname, '../build/');
-const fetch = require("isomorphic-fetch");
+const RES_PATH = path.resolve(__dirname, '../dist/');
+const axios = require("axios");
 
 //////////////////////////////////////////////////////
 
@@ -39,18 +39,16 @@ async function loadHTMLTemplate(path) {
 
 router.get('/', async (ctx, next) => {
 
-    let $ = await loadHTMLTemplate(path.resolve(__dirname, '../build/index.html'));
+    let $ = await loadHTMLTemplate(path.resolve(RES_PATH, 'index.html'));
 
     if (!$) {
         return ctx.body = null;
     }
-    //这里导出的组件不包括redux
-    let IndexBundle = require("../build_server/index.bundle.js");
+
+    let IndexBundle = require("./dist_server/index.ssr");
 
     //fetch接口数据
-    let todoList = await(await fetch('http://localhost:8088/api/todo_list')).json();
-
-    let initialData = {todoList};
+    let {data: initialData} = await axios.get('http://localhost:8088/api/todo_list');
 
     let instance = React.createElement(IndexBundle.default, initialData);
 
@@ -70,22 +68,21 @@ router.get('/', async (ctx, next) => {
 });
 
 
-router.get('/todo_detail', async (ctx, next) => {
-    let $ = await loadHTMLTemplate(path.resolve(__dirname, '../build/todo_detail.html'));
-
-    if (!$) {
-        return ctx.body = null;
-    }
-
-    return ctx.body = $.html();
-
-});
-
-
 //API接口
 router.get('/api/todo_list', async (ctx, next) => {
 
-    return ctx.body = ['11', '222'];
+    return ctx.body = {
+        todoList: [{
+            content: "Mewnxuacir lfq lqbemwwbf.",
+            createTime: "1992-07-12",
+            done: true,
+            id: 1,
+        }],
+        todoStatus: {
+            pending: false,
+            error: false
+        }
+    };
 
 });
 
@@ -104,9 +101,8 @@ app.use(function (ctx, next) {
     return next();
 });
 
-//hfs
 app.use(serve({rootDir: RES_PATH}));
 
 app.listen(8088, _ => {
-    console.log('server started')
+    console.log('server started... http://localhost:8088/')
 });

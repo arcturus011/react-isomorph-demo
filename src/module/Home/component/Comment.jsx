@@ -17,12 +17,18 @@ export default class Comment extends React.Component {
 
     add() {
 
+        let {store} = this.context;
+
         let text = this.commentInput.value;
 
         if (!text) return false;
 
-        this.props.handleAddComment(text);
-
+        store.dispatch({
+            type: 'todo/add/request',
+            payload: {
+                content: text
+            }
+        });
 
         this.commentInput.value = '';
 
@@ -35,13 +41,13 @@ export default class Comment extends React.Component {
                           name="comment-input"
                           id="comment-input"
                           placeholder="add todo"></textarea>
-                <button onClick={this.add.bind(this)} className="pure-button pure-button-primary">ADD</button>
+                <button onClick={this.add.bind(this)} className="pure-button pure-button-primary">添加</button>
             </div>
         )
     }
 
 }
 
-Comment.propTypes = {
-    handleAddComment: React.PropTypes.func.isRequired
+Comment.contextTypes = {
+    store: React.PropTypes.object
 }
