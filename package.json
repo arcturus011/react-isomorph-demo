@@ -7,8 +7,9 @@
     "start": "node --harmony server/index",
     "watch": "webpack -d -w --progress --colors",
     "dev-server-koa": "node --harmony server/devServer",
-    "dist": "cross-env NODE_ENV='production' webpack -p",
+    "dist": "cross-env NODE_ENV='production' webpack -p --progress",
     "dist-ssr-bundle": "cross-env NODE_ENV='production' webpack --config ./server/webpack.ssr.config.js",
+    "dist-all":"npm run dist && npm run dist-ssr-bundle",
     "test": "gulp --gulpfile  ./__TEST__/gulpfile.js"
   },
   "repository": {
